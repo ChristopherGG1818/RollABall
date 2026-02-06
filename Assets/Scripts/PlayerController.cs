@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     // Detects when the Player overlaps with the coin
     void OnTriggerEnter(Collider other) 
     {
-        // IMPORTANT: Make sure your coin tag is exactly "coin" in Unity!
-        if (other.gameObject.CompareTag("coin"))
+        // IMPORTANT: Make sure your coin tag is exactly "Pickup" in Unity!
+        if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
         }
@@ -39,4 +39,6 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb.AddForce(movement * speed);
     }
+
+    
 }
