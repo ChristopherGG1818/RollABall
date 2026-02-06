@@ -1,15 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.InputSystem;
+using TMPro; 
+
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
-    public float jumpForce = 15f;
     private Rigidbody rb;
+    public float jumpForce = 15f;
+    public float movementX;
+    public float movementY;
+    private int count;
+
+    public TextMeshProUGUI countText;
+
 
     void Start()
     {
-        // This connects the script to the Rigidbody component
         rb = GetComponent<Rigidbody>();
+        count =0; 
+        SetCountText();
+    }
+
+    // void OnMove(InputValue movementValue)
+    // {
+    //     Vector2 movementVector = movementValue.Get<Vector2>();
+    //     movementX = movementVector.X;
+    //     movementY = movementVector.y;
+    // }
+
+    void SetCountText()
+    {
+        countText. text = "Count: " + count.ToString();
     }
 
     void Update()
@@ -20,14 +44,15 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
-
-    // Detects when the Player overlaps with the coin
     void OnTriggerEnter(Collider other) 
     {
         // IMPORTANT: Make sure your coin tag is exactly "Pickup" in Unity!
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+            count++;
+
+            SetCountText();
         }
     }
 
