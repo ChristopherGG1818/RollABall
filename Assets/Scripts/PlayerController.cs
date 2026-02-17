@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float movementY;
     private int count;
 
+    public AudioSource coinSound;
+
     public TextMeshProUGUI countText;
 
 
@@ -49,6 +51,11 @@ public class PlayerController : MonoBehaviour
         // IMPORTANT: Make sure your coin tag is exactly "Pickup" in Unity!
         if (other.gameObject.CompareTag("PickUp"))
         {
+            if (coinSound != null)
+            {
+                coinSound.Play();
+            }
+
             other.gameObject.SetActive(false);
             count++;
 
